@@ -49,10 +49,10 @@ desktop.ini
 .env
 .env.local
 
-# Model files (too large for git - upload separately)
-*.h5
-*.keras
-*.pkl
+# Model files - USING GIT LFS (tracked in .gitattributes)
+# *.h5  # Commented out - using Git LFS instead
+# *.keras
+# *.pkl
 
 # Temporary files
 temp/
