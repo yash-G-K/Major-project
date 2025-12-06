@@ -10,19 +10,23 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # System deps for OpenCV (basic image libs)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libglib2.0-0 libsm6 libxrender1 libxext6 \
-        libgl1-mesa-glx build-essential \
+        libglib2.0-0 \
+        libsm6 \
+        libxrender1 \
+        libxext6 \
+        libgomp1 \
+        libglib2.0-dev \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 # Copy dependency spec first (better layer caching)
-COPY requirements.txt ./
+COPY requirements-cloud.txt requirements.txt
 
 # Install dependencies (no cache to reduce image size)
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt \
-    && pip uninstall -y matplotlib seaborn || true
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Copy application source
 COPY app.py ./
