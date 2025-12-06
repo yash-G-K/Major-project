@@ -1,0 +1,60 @@
+# Git ignore file for AI Skin Analysis project
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Flask
+instance/
+.webassets-cache
+
+# Uploads folder (user uploaded images)
+uploads/*
+!uploads/.gitkeep
+
+# PyInstaller
+*.spec
+*.manifest
+*.exe
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# Model files (too large for git - upload separately)
+*.h5
+*.keras
+*.pkl
+
+# Temporary files
+temp/
+tmp/
+*.tmp

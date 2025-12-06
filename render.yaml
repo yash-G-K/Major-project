@@ -1,0 +1,33 @@
+# Cloud Deployment Configuration for Render.com
+# This file configures automatic deployment
+
+services:
+  # Web Service
+  - type: web
+    name: ai-skin-analysis
+    env: python
+    region: oregon  # Choose: oregon, frankfurt, singapore
+    plan: free  # Options: free, starter ($7/mo), standard ($25/mo)
+    
+    # Build settings
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --timeout 120 --workers 1"
+    
+    # Environment variables
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        generateValue: true
+    
+    # Health check
+    healthCheckPath: /
+    
+    # Auto-deploy settings
+    autoDeploy: true
+    
+    # Disk storage (if needed for uploads)
+    disk:
+      name: uploads
+      mountPath: /app/uploads
+      sizeGB: 1

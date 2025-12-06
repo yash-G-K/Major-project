@@ -1,0 +1,901 @@
+/* Custom CSS for AI Skin Analysis App */
+
+/* Global Styles */
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #8b5cf6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #3b82f6;
+    --light-color: #f8fafc;
+    --dark-color: #1e293b;
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --gradient-secondary: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: #f8fafc;
+}
+
+.text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: var(--shadow-md);
+    background: var(--gradient-primary) !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%236366f1" opacity="0.1"><polygon points="1000,100 1000,0 0,100"/></svg>') no-repeat;
+    background-size: cover;
+    z-index: 1;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-image img {
+    border-radius: 20px;
+    box-shadow: var(--shadow-xl);
+}
+
+.feature-badges .badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+}
+
+/* Analysis Section */
+.analysis-section {
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+}
+
+.analysis-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-xl);
+    border: none;
+    overflow: hidden;
+}
+
+.analysis-card .card-header {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 2rem;
+}
+
+.analysis-card .card-body {
+    padding: 2rem;
+}
+
+/* Upload Methods */
+.upload-options {
+    margin-bottom: 2rem;
+}
+
+.upload-method {
+    background: white;
+    border: 2px dashed #e2e8f0;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.upload-method:hover {
+    border-color: var(--primary-color);
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.upload-method.active {
+    border-color: var(--primary-color);
+    background: #f0f9ff;
+}
+
+.upload-method i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.upload-method h5 {
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.upload-method p {
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+/* Upload Zone */
+.upload-zone {
+    border: 3px dashed #d1d5db;
+    border-radius: 15px;
+    padding: 3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+    border-color: var(--primary-color);
+    background: #f0f9ff;
+}
+
+.upload-zone i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.upload-zone h5 {
+    color: var(--dark-color);
+    margin-top: 1rem;
+}
+
+/* Camera Section */
+.camera-container {
+    text-align: center;
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #e2e8f0;
+}
+
+#camera-video {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-lg);
+}
+
+.camera-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Image Preview */
+.image-preview-container {
+    position: relative;
+}
+
+#preview-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: var(--shadow-lg);
+}
+
+.analysis-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    gap: 1rem;
+}
+
+/* Loading Section */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Results Section */
+.results-container {
+    margin-top: 2rem;
+}
+
+.result-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #e2e8f0;
+}
+
+.confidence-bar {
+    margin-top: 1rem;
+}
+
+.progress {
+    height: 12px;
+    border-radius: 10px;
+    background-color: #e2e8f0;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+#condition-icon {
+    opacity: 0.8;
+}
+
+/* Product Recommendations */
+.recommendations-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
+.product-brand {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-name {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--success-color);
+}
+
+.product-rating {
+    color: var(--warning-color);
+}
+
+.product-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.skin-type-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skin-type-badge {
+    background: var(--light-color);
+    color: var(--dark-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid #e2e8f0;
+}
+
+.skin-type-badge.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Features Section */
+.features-section {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.feature-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.feature-card h5 {
+    color: var(--dark-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-success {
+    background: var(--success-color);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Action Buttons */
+.action-buttons {
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 15px;
+    border: 2px solid #e2e8f0;
+}
+
+/* Toast Notifications */
+.toast {
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+}
+
+.toast-header {
+    background: var(--light-color);
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .analysis-card .card-header {
+        padding: 1.5rem;
+    }
+    
+    .analysis-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .upload-method {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .camera-controls {
+        flex-direction: column;
+    }
+    
+    .btn-lg {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .upload-zone {
+        padding: 2rem 1rem;
+    }
+    
+    .upload-zone i {
+        font-size: 2rem;
+    }
+    
+    .result-card {
+        padding: 1.5rem;
+    }
+    
+    .recommendations-section {
+        padding: 1.5rem;
+    }
+    
+    .action-buttons {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading Animation */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Success States */
+.success-state {
+    border-color: var(--success-color) !important;
+    background-color: #f0fdf4;
+}
+
+.error-state {
+    border-color: var(--danger-color) !important;
+    background-color: #fef2f2;
+}
+
+/* Skincare Tips Section */
+.skincare-tips-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+}
+
+.tips-card .card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tips-card .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.tips-card .card-header {
+    font-weight: 600;
+    border: none;
+    padding: 1rem 1.5rem;
+}
+
+.tips-card .card-body {
+    padding: 1.5rem;
+}
+
+.do-tips .card-header {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+}
+
+.dont-tips .card-header {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+.tips-card ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.tips-card ul li:last-child {
+    border-bottom: none;
+}
+
+.tips-card ul li:hover {
+    background-color: #f8fafc;
+    padding-left: 0.5rem;
+    border-radius: 6px;
+}
+
+.tips-card ul li i {
+    width: 20px;
+    text-align: center;
+}
+
+.tips-card ul li span {
+    color: var(--dark-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Enhanced Product Cards */
+.product-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.product-header {
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Enhanced Price Display */
+.product-pricing {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #0ea5e9;
+}
+
+.price-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.price-usd {
+    color: #059669;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.price-inr {
+    color: #0d47a1;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.price-display small {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+/* Enhanced Rating Display */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: #fff7ed;
+    border-radius: 8px;
+    border: 1px solid #fb923c;
+}
+
+.rating-stars {
+    color: #f59e0b;
+    font-size: 1.1rem;
+}
+
+.rating-text {
+    font-weight: 500;
+}
+
+/* Enhanced Skin Type Badges */
+.skin-type-badges {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.skin-type-badges strong {
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.skin-type-badge {
+    background: var(--light-color);
+    color: var(--dark-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid #e2e8f0;
+    margin: 0.2rem;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.skin-type-badge.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+.skin-type-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Ingredients Section */
+.product-ingredients {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #10b981;
+}
+
+.ingredients-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.ingredients-header strong {
+    color: var(--dark-color);
+    font-size: 1rem;
+}
+
+.ingredients-header .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+}
+
+.ingredients-content {
+    transition: all 0.3s ease;
+}
+
+.key-ingredients {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.ingredient-tag {
+    background: white;
+    color: var(--dark-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid #10b981;
+    cursor: help;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.ingredient-tag:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.full-ingredients {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #d1fae5;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.full-ingredients::-webkit-scrollbar {
+    width: 6px;
+}
+
+.full-ingredients::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.full-ingredients::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 3px;
+}
+
+/* Responsive Design for Enhanced Cards */
+@media (max-width: 768px) {
+    .product-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .product-info-grid {
+        gap: 0.75rem;
+    }
+    
+    .product-pricing {
+        padding: 0.75rem;
+    }
+    
+    .price-display {
+        gap: 0.3rem;
+    }
+    
+    .price-usd, .price-inr {
+        font-size: 1rem;
+    }
+    
+    .ingredients-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .product-ingredients {
+        padding: 1rem;
+    }
+    
+    .ingredient-tag {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-card {
+        padding: 1rem;
+    }
+    
+    .skin-type-badges {
+        padding: 0.75rem;
+    }
+    
+    .full-ingredients {
+        max-height: 100px;
+        font-size: 0.8rem;
+    }
+    
+    .key-ingredients {
+        gap: 0.3rem;
+    }
+    
+    .ingredient-tag {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+/* Responsive tips */
+@media (max-width: 768px) {
+    .skincare-tips-section {
+        padding: 1rem;
+    }
+    
+    .tips-card .card-body {
+        padding: 1rem;
+    }
+    
+    .tips-card ul li span {
+        font-size: 0.9rem;
+    }
+}

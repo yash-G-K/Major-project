@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Skin Analysis & Cosmetics Recommendation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-magic me-2"></i>
+                AI Skin Care Assistant
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold text-primary mb-4">
+                        Smart Skin Analysis & 
+                        <span class="text-gradient">Cosmetics Recommendations</span>
+                    </h1>
+                    <p class="lead mb-4">
+                        Get personalized skincare recommendations using advanced AI technology. 
+                        Upload your photo or use your camera for instant skin analysis.
+                    </p>
+                    <div class="feature-badges mb-4">
+                        <span class="badge bg-success me-2"><i class="fas fa-check"></i> Face Detection</span>
+                        <span class="badge bg-info me-2"><i class="fas fa-brain"></i> AI Analysis</span>
+                        <span class="badge bg-warning"><i class="fas fa-file-pdf"></i> PDF Reports</span>
+                    </div>
+                    <button class="btn btn-primary btn-lg me-3" onclick="scrollToAnalysis()">
+                        <i class="fas fa-camera me-2"></i>Start Analysis
+                    </button>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <img src="{{ url_for('static', filename='images/hero-skin.jpg') }}" 
+                             alt="AI Skin Care Analysis" class="img-fluid rounded-3 shadow-lg"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzYzNjZmMTtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojOGI1Y2Y2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmcpIiByeD0iMjAiLz4KICA8Y2lyY2xlIGN4PSIyNTAiIGN5PSIxNTAiIHI9IjgwIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMTUpIiBzdHJva2U9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4zKSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGNpcmNsZSBjeD0iMjUwIiBjeT0iMTUwIiByPSI2MCIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjIpIiBzdHJva2U9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC40KSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGNpcmNsZSBjeD0iMjUwIiBjeT0iMTUwIiByPSI0MCIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjMpIiBzdHJva2U9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC42KSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGNpcmNsZSBjeD0iMjUwIiBjeT0iMTUwIiByPSIyMCIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjUpIi8+CiAgPHBhdGggZD0iTTIzNSAxNDBMMjQ1IDE1MEwyNjUgMTMwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjI1MCIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QUkgU2tpbiBBbmFseXNpczwvdGV4dD4KICA8dGV4dCB4PSIyNTAiIHk9IjMwOCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBvd2VyZWQgYnkgQUkgVGVjaG5vbG9neTwvdGV4dD4KICA8cGF0aCBkPSJNMTAwIDI1MEwxMjAgMjQwTDE0MCAyNjBMMTYwIDI1ME0xMDAgMjcwTDEyMCAyNjBMMTQwIDI4MEwxNjAgMjcwTTEwMCAyOTBMMTIwIDI4MEwxNDAgMzAwTDE2MCAyOTAiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjQpIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0zNDAgMjUwTDM2MCAyNDBMMzgwIDI2MEw0MDAgMjUwTTM0MCAyNzBMMzYwIDI2MEwzODAgMjgwTDQwMCAyNzBNMzQwIDI5MEwzNjAgMjgwTDM4MCAzMDBMNDAwIDI5MCIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNCkiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGNpcmNsZSBjeD0iMTMwIiBjeT0iMTAwIiByPSI4IiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNikiLz4KICA8Y2lyY2xlIGN4PSIzNzAiIGN5PSIxMDAiIHI9IjgiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC42KSIvPgogIDxjaXJjbGUgY3g9IjEzMCIgY3k9IjMyMCIgcj0iNiIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjUpIi8+CiAgPGNpcmNsZSBjeD0iMzcwIiBjeT0iMzIwIiByPSI2IiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSkiLz4KPC9zdmc+'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section id="analysis-section" class="analysis-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="analysis-card">
+                        <div class="card-header text-center">
+                            <h2 class="mb-3">
+                                <i class="fas fa-microscope text-primary me-2"></i>
+                                Skin Analysis Tool
+                            </h2>
+                            <p class="text-muted">Choose how you'd like to upload your image for analysis</p>
+                        </div>
+
+                        <div class="card-body">
+                            <!-- Upload Options -->
+                            <div class="upload-options mb-4">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="upload-method" onclick="activateFileUpload()">
+                                            <i class="fas fa-cloud-upload-alt mb-3"></i>
+                                            <h5>Upload Photo</h5>
+                                            <p>Choose an image file from your device</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="upload-method" onclick="activateCamera()">
+                                            <i class="fas fa-camera mb-3"></i>
+                                            <h5>Take Photo</h5>
+                                            <p>Use your device's camera to capture</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- File Upload -->
+                            <div id="file-upload-section" style="display: none;">
+                                <div class="upload-zone" id="upload-zone">
+                                    <input type="file" id="file-input" accept="image/*" style="display: none;">
+                                    <i class="fas fa-cloud-upload-alt mb-3"></i>
+                                    <h5>Drop your image here or click to browse</h5>
+                                    <p class="text-muted">Supports JPG, PNG, JPEG (Max 16MB)</p>
+                                </div>
+                            </div>
+
+                            <!-- Camera Section -->
+                            <div id="camera-section" style="display: none;">
+                                <div class="camera-container">
+                                    <div class="camera-status mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            <span id="camera-status-text">Initializing camera...</span>
+                                        </small>
+                                    </div>
+                                    <video id="camera-video" autoplay playsinline muted></video>
+                                    <canvas id="camera-canvas" style="display: none;"></canvas>
+                                    <div class="camera-controls mt-3">
+                                        <button class="btn btn-primary" id="capture-btn" disabled>
+                                            <i class="fas fa-camera me-2"></i>Capture Photo
+                                        </button>
+                                        <button class="btn btn-secondary ms-2" id="switch-camera-btn" disabled>
+                                            <i class="fas fa-sync-alt me-2"></i>Switch Camera
+                                        </button>
+                                    </div>
+                                    <div class="camera-help mt-2">
+                                        <small class="text-muted">
+                                            💡 <strong>Tip:</strong> If camera doesn't work, check browser permissions or try refreshing the page
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview and Analysis -->
+                            <div id="preview-section" style="display: none;">
+                                <h5 class="mb-3">Preview & Analyze</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="image-preview-container">
+                                            <img id="preview-image" class="img-fluid rounded" alt="Preview">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="analysis-controls">
+                                            <button class="btn btn-success btn-lg w-100 mb-3" id="analyze-btn">
+                                                <i class="fas fa-magic me-2"></i>Analyze Skin
+                                            </button>
+                                            <button class="btn btn-outline-secondary w-100" onclick="resetUpload()">
+                                                <i class="fas fa-redo me-2"></i>Try Another Image
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Loading -->
+                            <div id="loading-section" style="display: none;">
+                                <div class="text-center py-5">
+                                    <div class="spinner-border text-primary mb-3" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <h5>Analyzing your skin...</h5>
+                                    <p class="text-muted">This may take a few moments</p>
+                                </div>
+                            </div>
+
+                            <!-- Results -->
+                            <div id="results-section" style="display: none;">
+                                <div class="results-container">
+                                    <h4 class="text-center mb-4">
+                                        <i class="fas fa-chart-line text-success me-2"></i>
+                                        Analysis Results
+                                    </h4>
+                                    
+                                    <!-- Skin Condition Result -->
+                                    <div class="result-card mb-4">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-8">
+                                                <h5>Detected Skin Condition</h5>
+                                                <h3 id="skin-condition" class="text-primary"></h3>
+                                                <div class="confidence-bar">
+                                                    <label class="form-label">Confidence Level</label>
+                                                    <div class="progress">
+                                                        <div id="confidence-bar" class="progress-bar bg-success" 
+                                                             role="progressbar" style="width: 0%"></div>
+                                                    </div>
+                                                    <small id="confidence-text" class="text-muted"></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 text-center">
+                                                <i id="condition-icon" class="fas fa-face-smile fa-4x text-primary"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Recommendations -->
+                                    <div class="recommendations-section">
+                                        <h5 class="mb-3">
+                                            <i class="fas fa-shopping-bag text-warning me-2"></i>
+                                            Recommended Products
+                                        </h5>
+                                        <div id="recommendations-container">
+                                            <!-- Recommendations will be loaded here -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Skincare Tips Section -->
+                                    <div class="skincare-tips-section mt-4">
+                                        <h5 class="mb-3">
+                                            <i class="fas fa-lightbulb text-info me-2"></i>
+                                            Personalized Skincare Tips
+                                        </h5>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="tips-card do-tips">
+                                                    <div class="card h-100 border-success">
+                                                        <div class="card-header bg-success text-white">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-check-circle me-2"></i>
+                                                                DO's for Your Skin Type
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="do-tips-container">
+                                                                <!-- DO tips will be loaded here -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="tips-card dont-tips">
+                                                    <div class="card h-100 border-danger">
+                                                        <div class="card-header bg-danger text-white">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-times-circle me-2"></i>
+                                                                DON'Ts for Your Skin Type
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="dont-tips-container">
+                                                                <!-- DON'T tips will be loaded here -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="action-buttons mt-4 text-center">
+                                        <button class="btn btn-danger btn-lg me-3" id="download-report-btn">
+                                            <i class="fas fa-file-pdf me-2"></i>Download PDF Report
+                                        </button>
+                                        <button class="btn btn-outline-primary btn-lg" onclick="resetUpload()">
+                                            <i class="fas fa-redo me-2"></i>New Analysis
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-12">
+                    <h2 class="display-6 fw-bold mb-3">Why Choose Our AI Skin Analysis?</h2>
+                    <p class="lead text-muted">Advanced technology meets personalized skincare recommendations</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5>Face Detection</h5>
+                        <p>Advanced face detection ensures only face images are analyzed for accurate results.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h5>AI-Powered Analysis</h5>
+                        <p>Trained on MobileNet architecture for fast and accurate skin condition detection.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h5>Product Matching</h5>
+                        <p>Get personalized cosmetic recommendations based on your specific skin condition.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h5>Detailed Reports</h5>
+                        <p>Download comprehensive PDF reports with analysis results and recommendations.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h5>Mobile Friendly</h5>
+                        <p>Use camera or upload photos from any device - desktop, tablet, or smartphone.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h5>Privacy Focused</h5>
+                        <p>Your images are processed securely and not stored on our servers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>AI Skin Care Assistant</h6>
+                    <p class="text-muted mb-0">Advanced AI technology for personalized skincare recommendations.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        For educational purposes. Consult a dermatologist for medical advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="notification-toast" class="toast" role="alert">
+            <div class="toast-header">
+                <i class="fas fa-info-circle text-primary me-2"></i>
+                <strong class="me-auto">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toast-message">
+                Message content
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

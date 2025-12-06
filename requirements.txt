@@ -1,0 +1,57 @@
+# ===== AI SKIN ANALYSIS & COSMETICS RECOMMENDATION SYSTEM =====
+# Complete Python Dependencies List
+# Installation: pip install -r requirements.txt
+
+# ===== CORE WEB FRAMEWORK =====
+flask==3.0.0                    # Main web application framework
+Werkzeug==3.0.1                # WSGI utilities for Flask
+
+# ===== MACHINE LEARNING & AI =====
+tensorflow==2.15.0; python_version < "3.13"  # Deep learning framework for Py<=3.12
+tensorflow==2.20.0; python_version >= "3.13" # Use TF 2.20.0 on Python 3.13+
+# keras (included with tensorflow)  # High-level neural networks API
+
+# ===== COMPUTER VISION =====
+opencv-python==4.8.1.78; python_version < "3.13"        # Computer vision for Py<=3.12
+opencv-python>=4.10.0.84; python_version >= "3.13"      # Newer wheels for Py>=3.13
+
+# ===== DATA PROCESSING =====
+numpy==1.24.4; python_version < "3.13"                 # For Py<=3.12
+numpy>=2.0.0; python_version >= "3.13"                 # For Py>=3.13
+pandas==2.1.4; python_version < "3.13"                  # For Py<=3.12
+pandas>=2.2.3; python_version >= "3.13"                 # For Py>=3.13 (wheels with NumPy 2)
+
+# ===== IMAGE PROCESSING =====
+Pillow==10.1.0; python_version < "3.13"                 # PIL for Py<=3.12
+Pillow>=10.4.0; python_version >= "3.13"               # PIL wheels for Py>=3.13
+
+# ===== PDF GENERATION =====
+reportlab==4.0.7               # Professional PDF generation library
+
+# ===== DATA VISUALIZATION (Optional) =====
+matplotlib==3.8.2; python_version < "3.13"   # OPTIONAL for Py<=3.12
+seaborn==0.13.0; python_version < "3.13"      # OPTIONAL for Py<=3.12
+
+# ===== BUILT-IN PYTHON MODULES USED =====
+# os                            # Operating system interface
+# io                            # Input/output operations
+# base64                        # Base64 encoding/decoding
+# datetime                      # Date and time operations
+# tempfile                      # Temporary file creation
+# json                          # JSON data handling
+# re                            # Regular expressions
+
+# ===== INSTALLATION COMMANDS =====
+# IMPORTANT ENVIRONMENT NOTES:
+# 1. Recommended Python version: 3.9–3.11. Current system shows Python 3.14 which lacks stable wheels for tensorflow/opencv/reportlab.
+# 2. If using Python 3.12+ or 3.14, expect build failures; install a lower Python via py launcher or conda.
+# 3. To create a virtual environment (Windows PowerShell):
+#    py -3.11 -m venv venv
+#    .\venv\Scripts\Activate.ps1
+#    pip install --upgrade pip
+#    pip install -r requirements.txt
+# 4. If you do NOT need plotting, you can remove matplotlib and seaborn lines.
+# 5. For Apple Silicon: replace tensorflow==2.15.0 with tensorflow-macos==2.15.0
+
+# Quick individual install (after activating venv):
+# pip install flask==3.0.0 Werkzeug==3.0.1 tensorflow==2.15.0 opencv-python==4.8.1.78 numpy==1.24.4 pandas==2.1.4 Pillow==10.1.0 reportlab==4.0.7
